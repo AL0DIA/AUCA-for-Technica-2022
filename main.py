@@ -2,21 +2,35 @@ import requests
 import urllib.request
 from PIL import Image
 
-if __name__ == '__main__':
 
-    genArt1 = requests.post(
+def generate_box_art(art_description, box_number):
+    request_name = 'reqArt' + box_number
+    response_name = 'getArt' + box_number
+    url_name = 'artBox' + box_number
+    output_name = 'comicBox' + box_number + '.png'
+    comic_box_name = 'box' + box_number
+
+    request_name = requests.post(
         "https://api.deepai.org/api/text2img",
         data={
-            'text': 'cute cat fighting against capitalism',
+            'text': art_description,
         },
         headers={'api-key': 'df27bb07-656a-4446-8ce6-c3dc50f387a6'}
     )
-    art1 = genArt1.json()
-    art1URL = art1["output_url"]
 
-    urllib.request.urlretrieve(art1URL, "art1.png")
-    img1 = Image.open("art1.png")
-    img1.show()
+    response_name = request_name.json()
+    url_name = response_name["output_url"]
+    urllib.request.urlretrieve(url_name, output_name)
+    comic_box_name = Image.open(output_name)
+    comic_box_name.show()
+
+
+if __name__ == '__main__':
+
+    artDescription = 'cats sharing a pizza on a cozy room'
+    boxNum = '6'
+
+    generate_box_art(artDescription, boxNum)
 
 
     
