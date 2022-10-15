@@ -18,3 +18,19 @@ if __name__ == '__main__':
     img1 = Image.open("art1.png")
     img1.show()
 
+
+    
+    
+
+    def get_num_boxes():
+        try:
+            num_boxes = input("How many boxes do you want on your comic strip (max. 6)? ")
+
+            if (num_boxes > 6 or num_boxes < 1):
+                raise Exception() 
+            return num_boxes
+
+        except:
+            print("\n Please, choose a valid number!")
+
+
